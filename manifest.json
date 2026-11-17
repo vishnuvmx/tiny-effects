@@ -1,0 +1,13 @@
+{
+  "name": "Tiny Effects",
+  "id": "tiny-effects-local-v1",
+  "api": "1.0.0",
+  "main": "dist/controller.js",
+  "ui": "dist/ui.html",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": ["none"]
+  }
+}
+

@@ -1,0 +1,682 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--figma-color-bg);
+  color: var(--figma-color-text);
+  font-family: var(--te-font-sans);
+  font-size: var(--te-font-size);
+  line-height: var(--te-line-height);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+/* Main plugin shell */
+.te-shell {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--figma-color-bg);
+  color: var(--figma-color-text);
+  position: relative;
+}
+
+/* Scrollable body inside plugin — no webkit scrollbar */
+.te-scroll-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.te-scroll-body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Preview section */
+.te-preview-section {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--figma-color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.te-preview-toolbar {
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.te-preview-title {
+  font-weight: 500;
+  color: var(--figma-color-text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.te-preview-meta {
+  color: var(--figma-color-text-tertiary);
+  font-weight: 400;
+}
+
+.te-preview-frame {
+  position: relative;
+  width: 100%;
+  height: 188px;
+  border-radius: var(--te-radius-preview);
+  border: 1px solid var(--figma-color-border);
+  overflow: hidden;
+  background-color: var(--te-checker-a);
+  background-image:
+    linear-gradient(45deg, var(--te-checker-b) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--te-checker-b) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--te-checker-b) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--te-checker-b) 75%);
+  background-size: 12px 12px;
+  background-position: 0 0, 0 6px, 6px -6px, -6px 0;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.te-preview-frame:active {
+  cursor: grabbing;
+}
+
+.te-preview-canvas {
+  display: block;
+  image-rendering: auto;
+  pointer-events: none;
+  transform-origin: center center;
+}
+
+.te-preview-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--figma-color-bg-brand);
+  opacity: 0.9;
+  z-index: 4;
+}
+
+.te-preview-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  height: 24px;
+}
+
+/* Empty & Notice states */
+.te-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 100%;
+  padding: 16px;
+  text-align: center;
+  color: var(--figma-color-text-secondary);
+}
+
+.te-notice-bar {
+  padding: 4px 12px;
+  background: var(--figma-color-bg-secondary);
+  border-bottom: 1px solid var(--figma-color-border);
+  color: var(--figma-color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.te-error-banner {
+  padding: 6px 12px;
+  background: var(--figma-color-bg-danger-secondary);
+  border-bottom: 1px solid var(--figma-color-bg-danger);
+  color: var(--figma-color-text-danger);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Effect Picker bar & simple menu */
+.te-effect-bar {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--figma-color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.te-effect-bar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.te-effect-bar-label {
+  font-weight: 500;
+  color: var(--figma-color-text);
+}
+
+.te-effect-trigger {
+  width: 100%;
+  height: var(--te-control-height);
+  padding: 0 8px;
+  background: var(--figma-color-bg-secondary);
+  border: 1px solid var(--figma-color-border);
+  border-radius: var(--te-radius-input);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background-color var(--te-transition), border-color var(--te-transition);
+}
+
+.te-effect-trigger:hover {
+  border-color: var(--figma-color-text-tertiary);
+}
+
+.te-effect-trigger:focus-visible {
+  outline: none;
+  border-color: var(--figma-color-border-selected);
+}
+
+.te-effect-menu {
+  position: absolute;
+  top: calc(100% - 4px);
+  left: 12px;
+  right: 12px;
+  background: var(--figma-color-bg);
+  box-shadow: var(--te-popover-shadow);
+  border-radius: var(--te-radius-input);
+  z-index: 30;
+  padding: 4px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.te-effect-menu-item {
+  height: 24px;
+  padding: 0 8px;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--figma-color-text);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.te-effect-menu-item:hover {
+  background: var(--figma-color-bg-brand);
+  color: var(--figma-color-text-onbrand);
+}
+
+.te-effect-menu-item[data-active='true'] {
+  font-weight: 500;
+}
+
+.te-effect-menu-check {
+  width: 12px;
+  height: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Collapsible Section */
+.te-section {
+  border-bottom: 1px solid var(--figma-color-border);
+}
+
+.te-section-header {
+  height: 32px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.te-section-header:hover {
+  background: var(--figma-color-bg-hover);
+}
+
+.te-section-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+  color: var(--figma-color-text);
+}
+
+.te-section-reset {
+  opacity: 0;
+  transition: opacity var(--te-transition);
+}
+
+.te-section-header:hover .te-section-reset {
+  opacity: 1;
+}
+
+.te-section-body {
+  padding: 4px 12px 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Property Row */
+.te-prop-row {
+  display: flex;
+  align-items: center;
+  min-height: var(--te-control-height);
+  gap: 8px;
+}
+
+.te-prop-label {
+  width: var(--te-label-width);
+  flex-shrink: 0;
+  color: var(--figma-color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.te-prop-label[data-scrubbable='true'] {
+  cursor: ew-resize;
+}
+
+.te-prop-control {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Scrub Input */
+.te-scrub-wrap {
+  display: flex;
+  align-items: center;
+  height: var(--te-control-height);
+  background: var(--figma-color-bg-secondary);
+  border: 1px solid transparent;
+  border-radius: var(--te-radius-input);
+  padding: 0 6px;
+  width: 58px;
+  flex-shrink: 0;
+  transition: border-color var(--te-transition);
+}
+
+.te-scrub-wrap:hover {
+  border-color: var(--figma-color-border);
+}
+
+.te-scrub-wrap:focus-within {
+  border-color: var(--figma-color-border-selected);
+  background: var(--figma-color-bg);
+}
+
+.te-scrub-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: right;
+  color: var(--figma-color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.te-scrub-unit {
+  color: var(--figma-color-text-tertiary);
+  margin-left: 2px;
+  pointer-events: none;
+}
+
+/* Slider + Scrub */
+.te-slider-track-wrap {
+  flex: 1;
+  height: var(--te-control-height);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.te-slider-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  background: var(--figma-color-border);
+  outline: none;
+  margin: 0;
+  cursor: pointer;
+}
+
+.te-slider-input:focus-visible {
+  outline: 1px solid var(--figma-color-border-selected);
+  outline-offset: 4px;
+}
+
+.te-slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--figma-color-text);
+  border: 2px solid var(--figma-color-bg);
+  cursor: pointer;
+}
+
+/* Segmented Control */
+.te-segmented {
+  display: flex;
+  align-items: center;
+  height: var(--te-control-height);
+  background: var(--figma-color-bg-secondary);
+  border-radius: var(--te-radius-input);
+  padding: 1px;
+  width: 100%;
+  border: 1px solid var(--figma-color-border);
+}
+
+.te-segmented-btn {
+  flex: 1;
+  height: 100%;
+  border: 1px solid transparent;
+  border-radius: 1px;
+  background: transparent;
+  color: var(--figma-color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  white-space: nowrap;
+  transition: background-color var(--te-transition), color var(--te-transition);
+}
+
+.te-segmented-btn:hover {
+  color: var(--figma-color-text);
+}
+
+.te-segmented-btn[data-active='true'] {
+  background: var(--figma-color-bg);
+  color: var(--figma-color-text);
+  border-color: var(--figma-color-border);
+  font-weight: 500;
+}
+
+.te-segmented-btn:focus-visible {
+  outline: none;
+  border-color: var(--figma-color-border-selected);
+}
+
+/* Select / Dropdown */
+.te-select {
+  width: 100%;
+  height: var(--te-control-height);
+  background: var(--figma-color-bg-secondary);
+  border: 1px solid var(--figma-color-border);
+  border-radius: var(--te-radius-input);
+  padding: 0 6px;
+  color: var(--figma-color-text);
+  cursor: pointer;
+}
+
+.te-select:focus {
+  outline: none;
+  border-color: var(--figma-color-border-selected);
+}
+
+/* Text input */
+.te-text-input {
+  width: 100%;
+  height: var(--te-control-height);
+  background: var(--figma-color-bg-secondary);
+  border: 1px solid var(--figma-color-border);
+  border-radius: var(--te-radius-input);
+  padding: 0 6px;
+  color: var(--figma-color-text);
+  font-family: var(--te-font-mono);
+}
+
+.te-text-input:focus {
+  outline: none;
+  border-color: var(--figma-color-border-selected);
+  background: var(--figma-color-bg);
+}
+
+/* Color Field */
+.te-color-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  height: var(--te-control-height);
+  background: var(--figma-color-bg-secondary);
+  border: 1px solid transparent;
+  border-radius: var(--te-radius-input);
+  padding: 0 6px;
+  position: relative;
+}
+
+.te-color-field:hover {
+  border-color: var(--figma-color-border);
+}
+
+.te-color-field:focus-within {
+  border-color: var(--figma-color-border-selected);
+  background: var(--figma-color-bg);
+}
+
+.te-color-swatch-wrap {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  border: 1px solid var(--figma-color-border);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.te-color-native-input {
+  position: absolute;
+  inset: -4px;
+  width: 24px;
+  height: 24px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.te-color-hex-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--figma-color-text);
+  font-family: var(--te-font-mono);
+  text-transform: uppercase;
+}
+
+.te-color-presets {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.te-color-preset-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 1px;
+  border: 1px solid var(--figma-color-border);
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Checkbox */
+.te-checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  height: var(--te-control-height);
+}
+
+.te-checkbox-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  border: 1px solid var(--figma-color-border);
+  background: var(--figma-color-bg-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.te-checkbox-box[data-checked='true'] {
+  background: var(--figma-color-bg-brand);
+  border-color: var(--figma-color-bg-brand);
+  color: var(--figma-color-text-onbrand);
+}
+
+/* Buttons */
+.te-btn {
+  height: var(--te-control-height);
+  padding: 0 10px;
+  border-radius: var(--te-radius-input);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color var(--te-transition), border-color var(--te-transition), opacity var(--te-transition);
+}
+
+.te-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.te-btn:focus-visible {
+  outline: 1px solid var(--figma-color-border-selected);
+  outline-offset: 1px;
+}
+
+.te-btn-primary {
+  background: var(--figma-color-bg-brand);
+  color: var(--figma-color-text-onbrand);
+  border: 1px solid transparent;
+}
+
+.te-btn-primary:hover:not(:disabled) {
+  background: var(--figma-color-bg-brand-hover);
+}
+
+.te-btn-secondary {
+  background: transparent;
+  color: var(--figma-color-text);
+  border: 1px solid var(--figma-color-border);
+}
+
+.te-btn-secondary:hover:not(:disabled) {
+  background: var(--figma-color-bg-hover);
+}
+
+.te-icon-btn {
+  width: var(--te-control-height);
+  height: var(--te-control-height);
+  border-radius: var(--te-radius-input);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--figma-color-text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color var(--te-transition), color var(--te-transition);
+}
+
+.te-icon-btn:hover:not(:disabled) {
+  background: var(--figma-color-bg-hover);
+  color: var(--figma-color-text);
+}
+
+.te-icon-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.te-icon-btn:focus-visible {
+  outline: none;
+  border-color: var(--figma-color-border-selected);
+}
+
+/* Sticky Footer */
+.te-footer {
+  padding: 8px 12px;
+  border-top: 1px solid var(--figma-color-border);
+  background: var(--figma-color-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.te-footer-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.te-footer-row > .te-btn {
+  flex: 1;
+}
