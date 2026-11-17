@@ -1,17 +1,9 @@
-<p align="center">
-  <img src="./image.jpg" alt="Tiny Effects Icon" width="88" height="88" style="border-radius: 16px;" />
-</p>
+# <img src="./image.jpg" alt="Tiny Effects" width="32" height="32" align="top" /> Tiny Effects
 
-<h1 align="center">Tiny Effects</h1>
+**Local-only raster & editable vector image effects for Figma.**  
+Select an image. Pick an effect. Tweak it. Drop it back on the canvas as a new layer.
 
-<p align="center">
-  <strong>Local-only raster & editable vector image effects for Figma.</strong><br />
-  Select an image. Pick an effect. Tweak it. Drop it back on the canvas as a new layer.
-</p>
-
-<p align="center">
-  <img src="./screenshot.png" alt="Tiny Effects running in Figma" width="100%" />
-</p>
+![Tiny Effects running in Figma](./screenshot.png)
 
 ---
 
@@ -33,22 +25,23 @@ Everything runs **100% locally** inside the plugin (`"networkAccess": { "allowed
 
 ## Effects Library
 
-| Effect | Description | PNG | Editable SVG |
-| :--- | :--- | :---: | :---: |
-| **Halftone** | Circle, Square, Diamond, and Line screens; Grid, Hex staggered, and Radial patterns; Monochrome, RGB, Source, and **4-channel CMYK separation** (`15°`, `75°`, `0°`, `45°`). | Yes | Yes (shapes grouped by channel) |
-| **ASCII** | Standard, Blocks (`█▓▒░`), Binary, Minimal, Dense, and Custom character sets; Mono, Source colour, and 2-Tone modes. | Yes | Yes (live `<text>` nodes) |
-| **Dithering** | **Atkinson**, **Floyd–Steinberg** (with serpentine scan), and **Bayer** (`2×2`, `4×4`, `8×8`) matrices; 1-Bit custom and curated retro palettes (*Game Boy, Newsprint, CGA, 8-Colour, 16-Colour*). | Yes | Yes (run-length `<rect>` nodes) |
-| **Pixelate** | Linked or independent cell dimensions, Average / Center / Dominant colour sampling, cell gap, corner radius, and palette quantization. | Yes | Yes (`<rect>` grid) |
-| **Glitch** | Per-channel RGB split (`X`/`Y`), seeded horizontal slice displacement, block corruption, CRT scanlines, and static noise. | Yes | — |
-| **Risograph** | 1 to 4 ink drums with curated Risograph ink presets, per-drum registration misalignment & skew, grain, halftone screen dots, and multiply overprint blending. | Yes | — |
-| **Stippling** | Brightness-weighted stratified dot placement with adjustable density, min/max dot size, scatter jitter, and deterministic seed. | Yes | Yes (`<circle>` nodes) |
-| **Crosshatch** | Up to 4 multi-angle tonal hatching passes driven by luminance thresholds with adjustable line weight, spacing, and hand-drawn jitter. | Yes | Yes (`<path>` strokes by pass) |
+| Effect         | Description                                                                                                                                                                                        | PNG |          Editable SVG           |
+| :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-: | :-----------------------------: |
+| **Halftone**   | Circle, Square, Diamond, and Line screens; Grid, Hex staggered, and Radial patterns; Monochrome, RGB, Source, and **4-channel CMYK separation** (`15°`, `75°`, `0°`, `45°`).                       | Yes | Yes (shapes grouped by channel) |
+| **ASCII**      | Standard, Blocks (`█▓▒░`), Binary, Minimal, Dense, and Custom character sets; Mono, Source colour, and 2-Tone modes.                                                                               | Yes |    Yes (live `<text>` nodes)    |
+| **Dithering**  | **Atkinson**, **Floyd–Steinberg** (with serpentine scan), and **Bayer** (`2×2`, `4×4`, `8×8`) matrices; 1-Bit custom and curated retro palettes (_Game Boy, Newsprint, CGA, 8-Colour, 16-Colour_). | Yes | Yes (run-length `<rect>` nodes) |
+| **Pixelate**   | Linked or independent cell dimensions, Average / Center / Dominant colour sampling, cell gap, corner radius, and palette quantization.                                                             | Yes |       Yes (`<rect>` grid)       |
+| **Glitch**     | Per-channel RGB split (`X`/`Y`), seeded horizontal slice displacement, block corruption, CRT scanlines, and static noise.                                                                          | Yes |                —                |
+| **Risograph**  | 1 to 4 ink drums with curated Risograph ink presets, per-drum registration misalignment & skew, grain, halftone screen dots, and multiply overprint blending.                                      | Yes |                —                |
+| **Stippling**  | Brightness-weighted stratified dot placement with adjustable density, min/max dot size, scatter jitter, and deterministic seed.                                                                    | Yes |     Yes (`<circle>` nodes)      |
+| **Crosshatch** | Up to 4 multi-angle tonal hatching passes driven by luminance thresholds with adjustable line weight, spacing, and hand-drawn jitter.                                                              | Yes | Yes (`<path>` strokes by pass)  |
 
 ---
 
 ## Controls & Keyboard Shortcuts
 
 ### Scrubbable Inputs
+
 - **Drag any property label** horizontally to scrub its value.
 - Hold **`Shift`** while scrubbing or pressing arrow keys for **`×10`** steps.
 - Hold **`Alt`** while scrubbing or pressing arrow keys for **`×0.1`** fine steps.
@@ -57,15 +50,15 @@ Everything runs **100% locally** inside the plugin (`"networkAccess": { "allowed
 
 ### Shortcuts
 
-| Shortcut | Action |
-| :--- | :--- |
-| `Enter` | **Apply** (creates a new high-res raster layer next to the source) |
-| `Shift + Enter` | **Apply as SVG** (creates editable vector layers next to the source) |
-| `\` *(hold backslash)* | Hold to **Compare** with the original source image |
-| `R` | **Randomise** parameters for the current effect |
-| `Ctrl/Cmd + Z` | **Undo** parameter or effect change |
-| `Shift + Ctrl/Cmd + Z` | **Redo** parameter or effect change |
-| `Double-click preview` | Reset preview pan & zoom to `100%` |
+| Shortcut               | Action                                                               |
+| :--------------------- | :------------------------------------------------------------------- |
+| `Enter`                | **Apply** (creates a new high-res raster layer next to the source)   |
+| `Shift + Enter`        | **Apply as SVG** (creates editable vector layers next to the source) |
+| `\` _(hold backslash)_ | Hold to **Compare** with the original source image                   |
+| `R`                    | **Randomise** parameters for the current effect                      |
+| `Ctrl/Cmd + Z`         | **Undo** parameter or effect change                                  |
+| `Shift + Ctrl/Cmd + Z` | **Redo** parameter or effect change                                  |
+| `Double-click preview` | Reset preview pan & zoom to `100%`                                   |
 
 ---
 
@@ -121,8 +114,8 @@ tiny-effects/
 
 ## Scripts
 
-| Command | Description |
-| :--- | :--- |
-| `npm run build` | Runs TypeScript typecheck (`tsc --noEmit`), bundles `dist/ui.html` (via Vite + `vite-plugin-singlefile`), and bundles `dist/controller.js` (via `esbuild`). |
-| `npm run typecheck` | Verifies strict TypeScript types across controller, engine, and UI. |
-| `npm run check` | Runs full typecheck and production build verification. |
+| Command             | Description                                                                                                                                                 |
+| :------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run build`     | Runs TypeScript typecheck (`tsc --noEmit`), bundles `dist/ui.html` (via Vite + `vite-plugin-singlefile`), and bundles `dist/controller.js` (via `esbuild`). |
+| `npm run typecheck` | Verifies strict TypeScript types across controller, engine, and UI.                                                                                         |
+| `npm run check`     | Runs full typecheck and production build verification.                                                                                                      |
