@@ -1,4 +1,4 @@
-export type EffectCategory = 'print' | 'retro' | 'distort';
+export type EffectCategory = 'print' | 'retro' | 'distort' | 'stylise';
 
 export type EffectId =
   | 'halftone'
@@ -8,7 +8,19 @@ export type EffectId =
   | 'glitch'
   | 'risograph'
   | 'stippling'
-  | 'crosshatch';
+  | 'crosshatch'
+  | 'photocopy'
+  | 'pixel-sorting'
+  | 'rgb-split'
+  | 'crt-scanlines'
+  | 'cutout'
+  | 'neon-glow'
+  | 'film-grain'
+  | 'engraving'
+  | 'mosaic'
+  | 'watercolor'
+  | 'emboss'
+  | 'duotone';
 
 export type ParamValue = number | string | boolean;
 
@@ -106,4 +118,3 @@ export interface EffectDefinition<P extends ParamMap = ParamMap> {
   renderSvg?: (source: PixelBuffer, params: P) => string;
   randomize: (current: P, seed: number) => P;
 }
-

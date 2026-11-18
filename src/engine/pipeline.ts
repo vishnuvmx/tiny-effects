@@ -176,7 +176,47 @@ export function scaleParamsForResolution(
       scaleKey('spacing', 2);
       scaleKey('lineWeight', 0.4);
       break;
+    case 'pixel-sorting':
+      scaleKey('maxSpan', 4);
+      break;
+    case 'rgb-split':
+      scaleKey('amount', 0);
+      scaleKey('redX', -200);
+      scaleKey('redY', -200);
+      scaleKey('blueX', -200);
+      scaleKey('blueY', -200);
+      break;
+    case 'crt-scanlines':
+      scaleKey('lineSpacing', 2);
+      break;
+    case 'cutout':
+      scaleKey('simplification', 1);
+      break;
+    case 'neon-glow':
+      scaleKey('tubeWidth', 1);
+      scaleKey('glowRadius', 2);
+      break;
+    case 'film-grain':
+      scaleKey('grainSize', 1);
+      break;
+    case 'engraving':
+      scaleKey('lineSpacing', 2.5);
+      scaleKey('maxWeight', 0.5);
+      scaleKey('waveAmp', 0);
+      break;
+    case 'mosaic':
+      scaleKey('cellSize', 4);
+      scaleKey('groutWidth', 0);
+      break;
+    case 'watercolor':
+      scaleKey('brushSize', 2);
+      break;
+    case 'emboss':
+      scaleKey('stepRadius', 1);
+      break;
     case 'ascii':
+    case 'photocopy':
+    case 'duotone':
       break;
   }
   return scaled;

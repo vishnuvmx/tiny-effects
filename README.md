@@ -9,7 +9,7 @@ Select an image. Pick an effect. Tweak it. Drop it back on the canvas as a new l
 
 ## Overview
 
-**Tiny Effects** is a native-feeling Figma plugin that transforms any image layer into stylised raster (`PNG`) or editable vector (`SVG`) artwork — including **Halftone**, **ASCII**, **Dithering**, **Pixelate**, **Glitch**, **Risograph**, **Stippling**, and **Crosshatch**.
+**Tiny Effects** is a native-feeling Figma plugin that transforms any image layer into stylised raster (`PNG`) or editable vector (`SVG`) artwork across **20 local effect engines** — including **Halftone**, **ASCII**, **Dithering**, **Pixelate**, **Glitch**, **Risograph**, **Stippling**, **Crosshatch**, **Photocopy**, **Pixel Sorting**, **RGB Split**, **CRT Scanlines**, **Cutout**, **Neon Glow**, **Film Grain**, **Engraving**, **Mosaic**, **Watercolor**, **Emboss**, and **Duotone**.
 
 Everything runs **100% locally** inside the plugin (`"networkAccess": { "allowedDomains": ["none"] }`). There is no backend, no account, no cloud processing, and no AI API.
 
@@ -25,6 +25,8 @@ Everything runs **100% locally** inside the plugin (`"networkAccess": { "allowed
 
 ## Effects Library
 
+![Tiny Effects Showcase Grid](./effects-showcase.jpg)
+
 | Effect | Description | PNG | Editable SVG |
 | :--- | :--- | :---: | :---: |
 | **Halftone** | Circle, Square, Diamond, and Line screens; Grid, Hex staggered, and Radial patterns; Monochrome, RGB, Source, and **4-channel CMYK separation** (`15°`, `75°`, `0°`, `45°`). | Yes | Yes (shapes grouped by channel) |
@@ -35,6 +37,18 @@ Everything runs **100% locally** inside the plugin (`"networkAccess": { "allowed
 | **Risograph** | 1 to 4 ink drums with curated Risograph ink presets, per-drum registration misalignment & skew, grain, halftone screen dots, and multiply overprint blending. | Yes | — |
 | **Stippling** | Brightness-weighted stratified dot placement with adjustable density, min/max dot size, scatter jitter, and deterministic seed. | Yes | Yes (`<circle>` nodes) |
 | **Crosshatch** | Up to 4 multi-angle tonal hatching passes driven by luminance thresholds with adjustable line weight, spacing, and hand-drawn jitter. | Yes | Yes (`<path>` strokes by pass) |
+| **Photocopy** | High-contrast xerox toner transfer with edge halo accentuation, toner dust/grit, and vertical drum streaks. | Yes | — |
+| **Pixel Sorting** | Horizontal or vertical interval span sorting driven by luminance, saturation, or red channel thresholds with span jitter. | Yes | — |
+| **RGB Split** | Linear angle, radial lens chromatic aberration, or manual X/Y channel separation. | Yes | — |
+| **CRT Scanlines** | Cathode-ray tube simulation with aperture grille/slot phosphor masks, barrel curvature, halation bloom, and scanline depth. | Yes | — |
+| **Cutout** | Matisse / Bauhaus paper-cut posterization with spatial shape simplification, paper depth shadows, and curated palettes. | Yes | Yes (layered `<rect>` shapes) |
+| **Neon Glow** | Sobel edge detection with multi-radius neon tube bloom, white-hot cores, and single, gradient, or source colour modes. | Yes | — |
+| **Film Grain** | Midtone-weighted 35mm emulsion grain with Kodak/Fuji/Ilford film stocks, matte fade, vignette, and film scratches. | Yes | — |
+| **Engraving** | Copperplate / banknote guilloché line engraving with wave amplitude/frequency modulation and variable stroke weight. | Yes | Yes (variable-width `<polygon>` lines) |
+| **Mosaic** | Stained-glass Voronoi cells, Hexagonal honeycomb, and Running-bond brick tiles with adjustable bevel and grout lines. | Yes | Yes (`<polygon>` / `<rect>` tiles) |
+| **Watercolor** | Kuwahara brush wash simplification, domain-warped wet pigment bleed, darkened edge pooling, and cold-press paper texture. | Yes | — |
+| **Emboss** | 3D directional surface-normal bump mapping with azimuth/elevation lighting and Stone, Metallic Foil, or Colour relief modes. | Yes | — |
+| **Duotone** | Split-tone and 3-stop tritone gradient mapping with curated colour presets, midpoint gamma shift, and mix control. | Yes | — |
 
 ---
 
@@ -84,6 +98,7 @@ tiny-effects/
 ├─ manifest.json               # Figma plugin manifest (local-only, networkAccess: none)
 ├─ image.jpg                   # Plugin artwork / icon
 ├─ screenshot.png              # Plugin preview screenshot
+├─ effects-showcase.jpg        # 16-effect showcase grid
 ├─ ui.html                     # Vite entry template
 ├─ vite.config.ts              # Single-file UI bundler configuration
 └─ src/
